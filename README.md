@@ -1,59 +1,108 @@
-Step 1. What This Project Does
+🌤️ Weather Data Collection System
 
-✔ Fetches weather data for cities (Hyderabad, Chennai, Mumbai, Bangalore)
-✔ Gets temperature, humidity, and weather condition
-✔ Saves the data into a JSON file
-✔ Uploads the JSON file to AWS S3
+A Python-based automation project that fetches real-time weather data, processes it, and securely stores the results in an AWS S3 bucket.
+This project demonstrates API integration, cloud storage, environment variable usage, error handling, and clean project structure.
 
-Step 2. Project Folder Structure
+🚀 Features
 
-weather_project/
+Fetch real-time weather data for multiple cities using OpenWeather API
+
+Extract temperature, humidity, and weather condition
+
+Error handling for failed API requests
+
+Automatically generate a timestamped JSON file
+
+Upload weather data to an AWS S3 bucket
+
+Fully environment-driven configuration (.env)
+
+Modular and clean Python code architecture
+
+🏗️ Architecture Diagram (GitHub-friendly)
+               ```
++----------------------+
+|   OpenWeather API    |
+|  (Weather Provider)  |
++----------+-----------+
+           |
+           v
++----------------------+
+|  weather_client.py   |
+|  Fetch weather data  |
++----------+-----------+
+           |
+           v
++----------------------+
+|       main.py        |
+| Process + Format     |
+|  Save JSON File      |
++----------+-----------+
+           |
+           v
++----------------------+
+|     s3_client.py     |
+|  Upload to AWS S3    |
++----------+-----------+
+           |
+           v
++----------------------+
+|    AWS S3 Bucket     |
+| Stores Weather Files |
++----------------------+
+```
+
+📁 Project Structure 
+weather-data-collection-system/
 │
 ├── src/
-│   ├── config.py
-│   ├── weather_client.py
-│   ├── s3_client.py
-│   └── main.py
+│   ├── main.py             # Main runner
+│   ├── weather_client.py   # Fetch weather data from OpenWeather
+│   ├── s3_client.py        # Upload data to AWS S3
+│   ├── utils.py            # Helper utilities
 │
-├── .env          (not uploaded to GitHub)
-├── .gitignore
-└── README.md
+├── .gitignore              # Ignore venv, .env, cache files
+├── requirements.txt        # Python dependencies
+└── README.md               # Documentation 
 
-Step 3. Requirements
+🔧 Requirements
 
-Install Python libraries:
+Python 3.8+
 
-pip install requests boto3 python-dotenv
+An OpenWeather API key
 
+AWS Account + IAM User with S3 Write Access
 
-Step 4. Setup .env File
+AWS S3 bucket
 
-Create a .env file in the project folder:
+Install dependencies:
 
-OPENWEATHER_API_KEY=3cc7b78dc455a8481f01189decc066ce
+pip install -r requirements.txt
 
-AWS_ACCESS_KEY_ID=aws access key
-AWS_SECRET_ACCESS_KEY=uBZB9/X9oa9rXbMUlb4qfJISA9toqu14b9mxf7R2
+🔑 Environment Variables (.env)
+
+Create a .env file in the project root:
+
+OPENWEATHER_API_KEY=YOUR_API_KEY
+
+AWS_ACCESS_KEY_ID=YOUR_AWS_KEY
+AWS_SECRET_ACCESS_KEY=YOUR_SECRET_KEY
 AWS_REGION=us-east-1
 
-S3_BUCKET_NAME=weather-project-bucket-joy
+S3_BUCKET_NAME=your-bucket-name
 CITIES=Hyderabad,Chennai,Mumbai,Bangalore
 
-Step 5. Run the Project
 
-Activate your virtual environment:
+⚠️ Never upload .env to GitHub
+(You already did this correctly — good job!)
 
-source venv/bin/activate
+▶️ Running the Project
 
-
-Run the main script:
+Use the Python module runner:
 
 python -m src.main
 
-Step 6. Output
-
-(venv) joyelisha@DESKTOP-LJFKFEK:~/weather_project$ nano .env
-(venv) joyelisha@DESKTOP-LJFKFEK:~/weather_project$ python -m src.main
+Example Console Output:
 Fetching weather data...
 Getting weather for: Hyderabad
 Getting weather for: Chennai
@@ -61,22 +110,53 @@ Getting weather for: Mumbai
 Getting weather for: Bangalore
 
 Weather Results:
-{'city': 'Hyderabad', 'timestamp': '2025-12-09T05:21:35.005932', 'temperature': 26.23, 'humidity': 25, 'condition': 'haze'}
-{'city': 'Chennai', 'timestamp': '2025-12-09T05:21:35.136265', 'temperature': 27.76, 'humidity': 75, 'condition': 'mist'}
-{'city': 'Mumbai', 'timestamp': '2025-12-09T05:21:35.266215', 'temperature': 29.99, 'humidity': 20, 'condition': 'smoke'}
-{'city': 'Bangalore', 'timestamp': '2025-12-09T05:21:35.453544', 'temperature': 24.16, 'humidity': 60, 'condition': 'clear sky'}
+{'city': 'Hyderabad', 'temperature': 26.2, 'humidity': 25, 'condition': 'haze'}
+...
 
 Uploading to AWS S3...
 Uploaded to S3: weather_data_20251209_052135.json
 
-summary 
 
-Takes weather data
+Once uploaded, you’ll see a JSON file in your AWS S3 bucket.
 
-Saves it
+📦 Sample JSON Output
+{
+  "city": "Hyderabad",
+  "timestamp": "2025-12-09T05:21:35",
+  "temperature": 26.23,
+  "humidity": 25,
+  "condition": "haze"
+}
 
-Uploads to S3
+🛡️ Error Handling
 
-we can use in this project  APIs + Cloud + Python.
+This project gracefully handles:
 
-author - Joy elisha
+Invalid API keys
+
+Network timeouts
+
+Missing environment variables
+
+S3 upload failures
+
+API request errors (401, 404, 500...)
+
+🚀 Future Improvements
+
+Add retry logic for unstable API responses
+
+Store data in DynamoDB for history tracking
+
+Build a dashboard using Streamlit
+
+Run the script on a schedule using AWS Lambda + CloudWatch
+
+Add GitHub Actions CI workflow
+
+Create Docker container support
+
+👤 Author
+
+Joy Elisha
+Project: Weather Data Collection & Cloud Storage Automation
