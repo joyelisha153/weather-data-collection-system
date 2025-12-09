@@ -32,7 +32,7 @@ Create a .env file in the project folder:
 
 OPENWEATHER_API_KEY=3cc7b78dc455a8481f01189decc066ce
 
-AWS_ACCESS_KEY_ID=aws acces key
+AWS_ACCESS_KEY_ID=aws access key
 AWS_SECRET_ACCESS_KEY=uBZB9/X9oa9rXbMUlb4qfJISA9toqu14b9mxf7R2
 AWS_REGION=us-east-1
 
@@ -70,8 +70,6 @@ Uploading to AWS S3...
 Uploaded to S3: weather_data_20251209_052135.json
 
 summary 
-
-This project:
 
 Takes weather data
 
